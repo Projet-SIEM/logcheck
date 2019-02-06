@@ -9,6 +9,8 @@ command /bin/sed -i -r 's|^SENDMAILTO=.*$|SENDMAILTO="mann.dcl@yahoo.com"|' /etc
 
 
 #ajout des fichiers de logs a analyser
-sudo echo le-chemin-du-fichier-de-generation-du-fichier-de-log-de-alexis >> /etc/logcheck/logcheck.logfiles
+sudo echo /home/vagrant/Malilog/Logs/logs.log >> /etc/logcheck/logcheck.logfiles
 
+#Pour lancer directement logcheck
+#sudo -u logcheck logcheck
 
