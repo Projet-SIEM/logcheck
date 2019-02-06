@@ -1,29 +1,32 @@
 #!/bin/bash
 # echappement ^ $ \ | { } [ ] ( ) ? # ! + * .
 
-#pour la date : \[\d{6}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\]
-REGEX_DATE = \[\d{6}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\]
+#pour la date
+REGEX_DATE="\[[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\]"
 
 #minium 3 de taille ?
-REGEX_PROTOCOL = \S+
+REGEX_PROTOCOL="\S+"
 
-REGEX_IP = ([0-9]{1,3}\.){3}[0-9]{1,3}
+REGEX_IP="([0-9]{1,3}\.){3}[0-9]{1,3}"
 
-REGEX_PORT = [0-9]{1,5}
+REGEX_PORT="[0-9]{1,5}"
 
-REGEX_MESSAGE = .*\n
+REGEX_MESSAGE=".*\n"
 
-MESSAGE = "Connection to server" 
+REGEX_ESPACE="(\s)+"
 
-tab-rule = ($REGEX_DATE \s+ $REGEX_PROTOCOL \s+ $REGEX_PROTOCOL \s+ $REGEX_IP \s+ $REGEX_IP \s+ $REGEX_PORT \s+ $REGEX_PORT \s+ $MESSAGE )
+MESSAGE="Connection to server" 
 
+RULE=$REGEX_DATE $REGEX_ESPACE $REGEX_PROTOCOL $REGEX_ESPACE $REGEX_PROTOCOL $REGEX_ESPACE $REGEX_IP $REGEX_ESPACE $REGEX_IP $REGEX_ESPACE $REGEX_PORT $REGEX_ESPACE $REGEX_PORT $REGEX_ESPACE $MESSAGE
 
-for i in ${tab-rule[@]}; 
-do
+sudo echo $RULE >> /etc/logcheck/ignore.d.server/local-rule ;
 
- sudo echo ${tab-rule[i]} >> /etc/logcheck/ignore.d.server/local-rule ;
+#for i in ${TAB[@]}; 
+#do
 
-done
+#sudo echo ${TAB[i]} >> /etc/logcheck/ignore.d.server/local-rule ;
+
+#done
 
 
 
