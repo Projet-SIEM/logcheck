@@ -20,8 +20,6 @@ def port(p = "[0-9]{1,5}"):
 def message(m = ".*"):
     return m + "\n"
 
-
-
 def main():#TODO: faire les fichier+ binaire ou tout type de fichier
     parser = argparse.ArgumentParser()
     parser.add_argument('--annee','-an',dest="annee",action='store',default="[0-9]{4}", help="annee cibler")
@@ -58,7 +56,7 @@ def main():#TODO: faire les fichier+ binaire ou tout type de fichier
     +message(args.mess)
 
 #TODO: verifier si la regle nest pas deja presente
-    with open("/etc/logcheck/ignore.d.server/local-rule", "a") as f:
+    with open("rules.txt", "a") as f:
         f.write(rule)
 
     print("Nouvelle regles ecrite:")
