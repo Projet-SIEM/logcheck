@@ -13,4 +13,4 @@ sudo echo /home/vagrant/Malilog/Logs/logs.log >> /etc/logcheck/logcheck.logfiles
 
 #Pour lancer directement logcheck
 #sudo -u logcheck logcheck
-
+#egrep -f /etc/logcheck/ignore.d.server/local-rules /home/vagrant/Malilog/Logs/logs.log
