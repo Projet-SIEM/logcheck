@@ -42,8 +42,7 @@ def main():#TODO: faire les fichier+ binaire ou tout type de fichier
 
     args = parser.parse_args()
 
-#ip parser
-
+    # parse les ip
     tabIPS = args.IPSource.split('.')
     tabIPD = args.IPDest.split('.')
 
@@ -55,12 +54,16 @@ def main():#TODO: faire les fichier+ binaire ou tout type de fichier
     +port(args.portSource)+ espace+"+"+port(args.portDest)+ espace+"+"\
     +message(args.mess)
 
-#TODO: verifier si la regle nest pas deja presente
-    with open("rules.txt", "a") as f:
+    with open("rules.txt", "r+") as f:
+        lignes = f.readlines()
+        for ligne in lignes:
+            if ligne == rule :
+                print("Regle deja presente")
+                exit(0)
         f.write(rule)
+        print("Nouvelle regles ecrite:")
+        print(rule)
 
-    print("Nouvelle regles ecrite:")
-    print(rule)
 
 if __name__ == "__main__" :
     main()
