@@ -1,27 +1,26 @@
 #!/usr/bin/env python3
 import argparse
 
-# TODO: inclusif
 # echappement ^ $ \ | { } [ ] ( ) ? # ! + * .
 
 espace = "\s"
 
 def date(annee,mois,jour,heure,minutes,secondes):
-    return "\["+annee+"-"+mois+"-"+jour+espace+heure+"-"+minutes+"-"+secondes+"\]"
+    return "\["+annee.replace("X","[0-9]")+"-"+mois.replace("X","[0-9]")+"-"+jour.replace("X","[0-9]")+espace+heure.replace("X","[0-9]")+"-"+minutes.replace("X","[0-9]")+"-"+secondes.replace("X","[0-9]")+"\]"
 
-def protocol(nom="\S+"):
-    return nom
+def protocol(nom):
+    return nom.replace("X",".*")
 
 def addresse_ip(solt1 = "[0-9]{1,3}",solt2 = "[0-9]{1,3}",solt3 = "[0-9]{1,3}"):
-    return solt1+"\."+solt2+"\."+solt3
+    return solt1.replace("X","[0-9]")+"\."+solt2.replace("X","[0-9]")+"\."+solt3.replace("X","[0-9]")
 
-def port(p = "[0-9]{1,5}"):
-    return p
+def port(p):
+    return p.replace("X","[0-9]")
 
 def message(m):
     return m + "\n"
 
-def main(): #TODO: faire les fichier+ binaire ou tout type de fichier
+def main():
     parser = argparse.ArgumentParser()
     groupMessage = parser.add_mutually_exclusive_group()
     parser.add_argument('--annee','-an',dest="annee",action='store',default="[0-9]{4}", help="annee cibler")
@@ -49,21 +48,13 @@ def main(): #TODO: faire les fichier+ binaire ou tout type de fichier
     tabIPS = args.IPSource.split('.')
     tabIPD = args.IPDest.split('.')
 
-    msg = ""
+    msg = ".*"
 
     if args.mess is not None :
-        tmp = ".*"+args.mess+".*"
-        for char in tmp:
-            if char == "X":
-                msg += ".*"
-            else:
-                msg += char
+        msg = (".*"+args.mess+".*").replace("X",".*")
 
     if args.messf is not None :
         msg = args.messf
-
-    if args.mess is None and args.messf is None:
-        msg = ".*"
 
     rule = date(args.annee,args.mois,args.jour,args.heure,args.minutes,args.secondes)+ espace+"+"\
     +protocol(args.protocolCouche3)+ espace+"+"+protocol(args.protocolCouche4)+ espace+"+"\
