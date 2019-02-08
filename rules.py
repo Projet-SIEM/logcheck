@@ -2,6 +2,7 @@
 import argparse
 
 # TODO: inclusif
+# echappement ^ $ \ | { } [ ] ( ) ? # ! + * .
 
 espace = "\s"
 
@@ -17,11 +18,12 @@ def addresse_ip(solt1 = "[0-9]{1,3}",solt2 = "[0-9]{1,3}",solt3 = "[0-9]{1,3}"):
 def port(p = "[0-9]{1,5}"):
     return p
 
-def message(m = ".*"):
+def message(m):
     return m + "\n"
 
-def main():#TODO: faire les fichier+ binaire ou tout type de fichier
+def main(): #TODO: faire les fichier+ binaire ou tout type de fichier
     parser = argparse.ArgumentParser()
+    groupMessage = parser.add_mutually_exclusive_group()
     parser.add_argument('--annee','-an',dest="annee",action='store',default="[0-9]{4}", help="annee cibler")
     parser.add_argument('--mois','-mo',dest="mois",action='store', default="[0-9]{2}", help="mois cibler")
     parser.add_argument('--jour','-jo',dest="jour",action='store', default="[0-9]{2}", help="jour cibler")
@@ -38,7 +40,8 @@ def main():#TODO: faire les fichier+ binaire ou tout type de fichier
     parser.add_argument('--portSource','-pS',dest="portSource",action='store', default="[0-9]{1,5}", help="port source a cibler")
     parser.add_argument('--portDestination','-pD',dest="portDest",action='store', default="[0-9]{1,5}", help="port destination a cibler")
 
-    parser.add_argument('--message','-m',dest="mess",action='store',default=".*", help="Le message a cibler")
+    groupMessage.add_argument('--messagefull','-mf',dest="messf",action='store', help="Le message a cibler")
+    groupMessage.add_argument('--message','-m',dest="mess",action='store', help="Partie du message a cibler")
 
     args = parser.parse_args()
 
@@ -46,13 +49,28 @@ def main():#TODO: faire les fichier+ binaire ou tout type de fichier
     tabIPS = args.IPSource.split('.')
     tabIPD = args.IPDest.split('.')
 
+    msg = ""
+
+    if args.mess is not None :
+        tmp = ".*"+args.mess+".*"
+        for char in tmp:
+            if char == "X":
+                msg += ".*"
+            else:
+                msg += char
+
+    if args.messf is not None :
+        msg = args.messf
+
+    if args.mess is None and args.messf is None:
+        msg = ".*"
 
     rule = date(args.annee,args.mois,args.jour,args.heure,args.minutes,args.secondes)+ espace+"+"\
     +protocol(args.protocolCouche3)+ espace+"+"+protocol(args.protocolCouche4)+ espace+"+"\
     +addresse_ip(tabIPS[0],tabIPS[1],tabIPS[2])+ espace+"+"\
     +addresse_ip(tabIPD[0],tabIPD[1],tabIPD[2])+ espace+"+"\
     +port(args.portSource)+ espace+"+"+port(args.portDest)+ espace+"+"\
-    +message(args.mess)
+    +message(msg)
 
     with open("rules.txt", "r+") as f:
         lignes = f.readlines()
