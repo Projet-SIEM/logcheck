@@ -24,7 +24,7 @@ def main():
     parser = argparse.ArgumentParser()
     groupMessage = parser.add_mutually_exclusive_group()
     parser.add_argument('--annee','-an',dest="annee",action='store',default="[0-9]{4}", help="annee cibler")
-    parser.add_argument('--mois','-mo',dest="mois",action='store', default="[0-9]{2}", help="mois cibler")
+    parser.add_argument('--mois','-mo',dest="mois",action='store', default="[0-12]", help="mois cibler")
     parser.add_argument('--jour','-jo',dest="jour",action='store', default="[0-9]{2}", help="jour cibler")
     parser.add_argument('--heure','-he',dest="heure",action='store', default="[0-9]{2}", help="heure cibler")
     parser.add_argument('--minutes','-mi',dest="minutes",action='store', default="[0-9]{2}", help="minutes cibler")
@@ -73,6 +73,7 @@ def main():
         print("Nouvelle regles ecrite:")
         print(rule)
 
+[1-9]|1[1-2]
 
 if __name__ == "__main__" :
     main()
