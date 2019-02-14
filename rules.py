@@ -23,12 +23,12 @@ def message(m):
 def main():
     parser = argparse.ArgumentParser()
     groupMessage = parser.add_mutually_exclusive_group()
-    parser.add_argument('--annee','-an',dest="annee",action='store',default="[0-9]{4}", help="annee cibler")
-    parser.add_argument('--mois','-mo',dest="mois",action='store', default="[0-12]", help="mois cibler")
-    parser.add_argument('--jour','-jo',dest="jour",action='store', default="[0-9]{2}", help="jour cibler")
-    parser.add_argument('--heure','-he',dest="heure",action='store', default="[0-9]{2}", help="heure cibler")
-    parser.add_argument('--minutes','-mi',dest="minutes",action='store', default="[0-9]{2}", help="minutes cibler")
-    parser.add_argument('--secondes','-se',dest="secondes",action='store', default="[0-9]{2}", help="secondes cibler")
+    parser.add_argument('--annee','-an',dest="annee",action='store',default="[0-9]{4}", help="annee ciblee")
+    parser.add_argument('--mois','-mo',dest="mois",action='store', default="[0-12]", help="mois cible")
+    parser.add_argument('--jour','-jo',dest="jour",action='store', default="[0-9]{2}", help="jour cible")
+    parser.add_argument('--heure','-he',dest="heure",action='store', default="[0-9]{2}", help="heure ciblee")
+    parser.add_argument('--minutes','-mi',dest="minutes",action='store', default="[0-9]{2}", help="minutes ciblee")
+    parser.add_argument('--secondes','-se',dest="secondes",action='store', default="[0-9]{2}", help="secondes ciblee")
 
     parser.add_argument('--protocolCouche3','-pc3',dest="protocolCouche3", default="\S+",action='store', help="protocol de la couche 3 a cibler")
     parser.add_argument('--protocolCouche4','-pc4',dest="protocolCouche4", default="\S+", action='store', help="protocol de la couche 4 a cibler")
@@ -73,7 +73,6 @@ def main():
         print("Nouvelle regles ecrite:")
         print(rule)
 
-[1-9]|1[1-2]
 
 if __name__ == "__main__" :
     main()
