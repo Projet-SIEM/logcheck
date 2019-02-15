@@ -18,7 +18,7 @@ def port(p):
     return p.replace("X","[0-9]")
 
 def message(m):
-    return m + "\b"
+    return m + "\\b"
 
 def main():
     parser = argparse.ArgumentParser()
