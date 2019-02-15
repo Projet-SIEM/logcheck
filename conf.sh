@@ -12,7 +12,7 @@ command /bin/sed -i -r 's|^SENDMAILTO=.*$|SENDMAILTO="admin@siem.mail"|' /etc/lo
 sudo echo /home/vagrant/Malilog/Logs/logs.log > /etc/logcheck/logcheck.logfiles
 
 
-chown root:adm /home/vagrant/Malilog/Logs/logs.log
+chown root:root /home/vagrant/Malilog/Logs/logs.log
 
 
 #Pour lancer directement logcheck
