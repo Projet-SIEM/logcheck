@@ -6,7 +6,7 @@ import argparse
 espace = "\s"
 
 def date(annee,mois,jour,heure,minutes,secondes):
-    return "\["+annee.replace("X","[0-9]")+"-"+mois.replace("X","[0-9]")+"-"+jour.replace("X","[0-9]")+espace+heure.replace("X","[0-9]")+"-"+minutes.replace("X","[0-9]")+"-"+secondes.replace("X","[0-9]")+"\]"
+    return "\["+annee.replace("X","[0-9]")+"-"+mois.replace("X","[0-9]")+"-"+jour.replace("X","[0-9]")+espace+heure.replace("X","[0-9]")+":"+minutes.replace("X","[0-9]")+":"+secondes.replace("X","[0-9]")+"\]"
 
 def protocol(nom):
     return nom.replace("X",".*")
