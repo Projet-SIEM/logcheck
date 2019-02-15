@@ -11,5 +11,9 @@ command /bin/sed -i -r 's|^SENDMAILTO=.*$|SENDMAILTO="admin@siem.mail"|' /etc/lo
 #ajout des fichiers de logs a analyser
 sudo echo /home/vagrant/Malilog/Logs/logs.log > /etc/logcheck/logcheck.logfiles
 
+
+chown root:adm /home/vagrant/Malilog/Logs/logs.log
+
+
 #Pour lancer directement logcheck
 #sudo -u logcheck logcheck
