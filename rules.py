@@ -11,8 +11,8 @@ def date(annee,mois,jour,heure,minutes,secondes):
 def protocol(nom):
     return nom.replace("X",".*")
 
-def addresse_ip(solt1 = "[0-9]{1,3}",solt2 = "[0-9]{1,3}",solt3 = "[0-9]{1,3}"):
-    return solt1.replace("X","[0-9]")+"\."+solt2.replace("X","[0-9]")+"\."+solt3.replace("X","[0-9]")
+def addresse_ip(solt1,solt2,solt3,solt4):
+    return solt1.replace("X","[0-9]")+"\."+solt2.replace("X","[0-9]")+"\."+solt3.replace("X","[0-9]")+"\."+solt4.replace("X","[0-9]")
 
 def port(p):
     return p.replace("X","[0-9]")
@@ -33,8 +33,8 @@ def main():
     parser.add_argument('--protocolCouche3','-pc3',dest="protocolCouche3", default="\S+",action='store', help="protocol de la couche 3 a cibler")
     parser.add_argument('--protocolCouche4','-pc4',dest="protocolCouche4", default="\S+", action='store', help="protocol de la couche 4 a cibler")
 
-    parser.add_argument('--addrIPSource','-ipS',dest="IPSource",action='store', default="[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}", help="IP source a cibler")
-    parser.add_argument('--addrIPDestination','-ipD',dest="IPDest",action='store', default="[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}", help="IP destination a cibler")
+    parser.add_argument('--addrIPSource','-ipS',dest="IPSource",action='store', default="[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}", help="IP source a cibler")
+    parser.add_argument('--addrIPDestination','-ipD',dest="IPDest",action='store', default="[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}", help="IP destination a cibler")
 
     parser.add_argument('--portSource','-pS',dest="portSource",action='store', default="[0-9]{1,5}", help="port source a cibler")
     parser.add_argument('--portDestination','-pD',dest="portDest",action='store', default="[0-9]{1,5}", help="port destination a cibler")
@@ -58,8 +58,8 @@ def main():
 
     rule = date(args.annee,args.mois,args.jour,args.heure,args.minutes,args.secondes)+ espace+"+"\
     +protocol(args.protocolCouche3)+ espace+"+"+protocol(args.protocolCouche4)+ espace+"+"\
-    +addresse_ip(tabIPS[0],tabIPS[1],tabIPS[2])+ espace+"+"\
-    +addresse_ip(tabIPD[0],tabIPD[1],tabIPD[2])+ espace+"+"\
+    +addresse_ip(tabIPS[0],tabIPS[1],tabIPS[2],tabIPS[3])+ espace+"+"\
+    +addresse_ip(tabIPD[0],tabIPD[1],tabIPD[2],tabIPD[3])+ espace+"+"\
     +port(args.portSource)+ espace+"+"+port(args.portDest)+ espace+"+"\
     +message(msg)
 
